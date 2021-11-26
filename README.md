@@ -22,19 +22,7 @@ sudo insmod myled.ko
 sudo chmod 666 /dev/myled0
 ```
 ## copy the repository  
-`https://github.com/kippei-onishi/robosys_2021.git`  
-
-## move directory  
-`cd myled`  
-
-## compile "myled.c"  
-``make``
-
-### install the module  
-`sudo insmod myled.ko`  
-
-## change permissions  
-`sudo chmod 666 /dev/myled0`    
+`https://github.com/kippei-onishi/robosys_2021.git`    
 
 
 ## turn off the first LED  
