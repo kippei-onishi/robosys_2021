@@ -8,7 +8,7 @@ This illuminates the LEDs on pins 23, 24, and 25.
 # Usage
 
 ## copy the repository  
-`git clone https://github.com/yanamaki0208/myled.git`  
+`https://github.com/kippei-onishi/robosys_2021.git`  
 
 ## move directory  
 `cd myled`  
