@@ -2,7 +2,7 @@
 
 This illuminates the LEDs on pins 23, 24, and 25.
 
-# DEMO
+# Circuit
 ![circuit](https://user-images.githubusercontent.com/94519129/143555711-ad96dca3-d6e3-4076-8bd0-e78166344446.png)
 
 
