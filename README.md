@@ -17,7 +17,7 @@ This illuminates the LEDs on pins 23, 24, and 25.
 ## compile "myled.c"  
 `make`  
 
-## install the module  
+### install the module  
 `sudo insmod myled.ko`  
 
 ## change permissions  
