@@ -23,13 +23,13 @@ This illuminates the LEDs on pins 23, 24, and 25.
 `sudo chmod 666 /dev/myled0`    
 
 
-## turn off the red LED  
+## turn off the first LED  
 `echo 0 < /dev/myled0`  
 
-## turn off the yellow LED  
+## turn off the second LED  
 `echo 1 < /dev/myled0`
 
-## turn off the blue LED  
+## turn off the third LED  
 `echo 2 < /dev/myled0`  
 
 ## turn off all LEDs  
