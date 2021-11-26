@@ -1,12 +1,19 @@
-# myled
+# robosys2021 課題
 
 This illuminates the LEDs on pins 23, 24, and 25.
 
-# Circuit
+# 回路図
 ![circuit](https://user-images.githubusercontent.com/94519129/143555711-ad96dca3-d6e3-4076-8bd0-e78166344446.png)
-
-
-# Usage
+# 実行環境
+|||
+|:-:|:-:|
+| OS | Ubuntu20.04 server |
+|Raspberry Pi|Raspberry Pi Model3B+|
+# 実行手順
+```
+https://github.com/kippei-onishi/robosys_2021.git
+cd robosys_2021
+```
 
 ## copy the repository  
 `https://github.com/kippei-onishi/robosys_2021.git`  
