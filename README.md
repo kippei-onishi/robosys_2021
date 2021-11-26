@@ -15,7 +15,12 @@ https://github.com/kippei-onishi/robosys_2021.git
 ```
 cd robosys_2021
 ```
-
+# Build the driver 
+```
+make  
+sudo insmod myled.ko  
+sudo chmod 666 /dev/myled0
+```
 ## copy the repository  
 `https://github.com/kippei-onishi/robosys_2021.git`  
 
