@@ -13,24 +13,29 @@ MODULE_VERSION("0.0.1");
 static dev_t dev;
 static struct cdev cdv;
 static struct class *cls = NULL;
-static volatile u32 *gpio_base1 = NULL; 
-static volatile u32 *gpio_base2 = NULL;
-static volatile u32 *gpio_base3 = NULL;
+static volatile u32 *gpio_base = NULL;
+static int usegpio[3] = {23,24,25};
 
 static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_t* pos)
 {
         char c;
         if(copy_from_user(&c,buf,sizeof(char)))
         	return -EFAULT;
-        if(c == '0')
-                gpio_base1[10] = 1 << 23;
-        else if(c == '1')
-                gpio_base2[10] = 1 << 24; 
-        else if(c == '2')
-                gpio_base3[10] = 1 << 25;
-        else if(c == '3')
-                gpio_base1[7] = 1 << 23;
-        return 1;
+
+        if(c == '1'){
+                gpio_base[10] = 1 << 23;
+	}else if(c == '2'){
+                gpio_base[10] = 1 << 24; 
+	}else if(c == '3'){
+                gpio_base[10] = 1 << 25;
+	}else if(c == '4'){
+                gpio_base[7] = 1 << 23;
+	}else if(c == '5'){
+		gpio_base[7] = 1 << 24;
+	}else if(c == '6'){
+		gpio_base[7] = 1 << 25;
+	}
+	return 1;
 }
 
 static struct file_operations led_fops = {
@@ -60,30 +65,17 @@ static int __init init_mod(void)
 	}
 	device_create(cls, NULL, dev, NULL, "myled%d",MINOR(dev));
 
-	gpio_base1 = ioremap_nocache(0x3f200000,0xA0);
+	gpio_base = ioremap_nocache(0x3f200000,0xA0);
+	
+	int i;
+	for(i = 0; i < 3; i++){
+		const u32 led = usegpio[i];
+		const u32 index = led/10;
+		const u32 shift = (led%10*3);
+		const u32 mask = ~(0x7<<shift);
+		gpio_base[index] = (gpio_base[index] & mask) | (0x1 << shift);
+	}
 
-	const u32 led1 = 23;
-	const u32 index1 = led1/10;
-	const u32 shift1 = (led1%10*3);
-	const u32 mask1 =~(0x7<<shift1);
-	gpio_base1[index1] = (gpio_base1[index1 & mask1]) | (0x1 << shift1);
-
-	gpio_base2 = ioremap_nocache(0x3f200000,0xA0);
-
-	const u32 led2 = 24;
-	const u32 index2 = led2/10;
-	const u32 shift2 = (led2%10*3);
-	const u32 mask2 =~(0x7<<shift2);
-	gpio_base2[index2] = (gpio_base2[index2 & mask2]) | (0x1 << shift2);
-
-	gpio_base3 = ioremap_nocache(0x3f200000,0xA0);
-
-	const u32 led3 = 25;
-	const u32 index3 = led3/10;
-	const u32 shift3 = (led3%10*3);
-	const u32 mask3 =~(0x7<<shift3);
-	gpio_base3[index3] = (gpio_base3[index3 & mask3]) | (0x1 << shift3);
-       
 	return 0;
 }
 
@@ -94,9 +86,6 @@ static void __exit cleanup_mod(void)
         class_destroy(cls);
         unregister_chrdev_region(dev, 1);
         printk(KERN_INFO "%s is unloaded. major:%d\n",__FILE__,MAJOR(dev));
-        iounmap(gpio_base1);
-        iounmap(gpio_base2);
-        iounmap(gpio_base3);
 }
 
 module_init(init_mod);
