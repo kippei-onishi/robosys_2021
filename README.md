@@ -1,6 +1,6 @@
 # Submission on robosys2021 
 
-This device driver to turn on 3 LEDs. 
+This device driver to control 3 LEDs. 
 
 # Circuit
 ![circuit](https://user-images.githubusercontent.com/94519129/143555711-ad96dca3-d6e3-4076-8bd0-e78166344446.png)
@@ -10,7 +10,7 @@ This device driver to turn on 3 LEDs.
 |----|----|
 |Raspberry Pi|Raspberry Pi Model3B+|
 
-# Installation
+# Install
 ```
 https://github.com/kippei-onishi/robosys_2021.git
 cd robosys_2021
@@ -20,46 +20,49 @@ cd robosys_2021
 make  
 sudo insmod myled.ko  
 sudo chmod 666 /dev/myled
-
 ```
 # Commands
 
-turn on the yellow LED
+turn on the first LED
 ```
-echo 4 < /dev/myled0 
+echo 4 > /dev/myled0 
 ```
-turn on the blue LED 
+turn on the second LED 
 ```
-echo 5 < /dev/myled0
+echo 5 > /dev/myled0
 ```
-turn on all LEDs  
+turn on the third LEDs  
 ```
-echo 345 < /dev/myled0  
+echo 6 > /dev/myled0  
+```
+turn on all LEDs
+```
+echo > 456 /dev/myled0
 ```
 turn off the first LED  
 ```
-echo 0 < /dev/myled0  
+echo 1 > /dev/myled0  
 ```
 turn off the second LED  
 ```
-echo 1 < /dev/myled0
+echo 2 > /dev/myled0
 ```
 turn off the third LED  
 ```
-echo 2 < /dev/myled0
+echo 3 > /dev/myled0
 ```
 turn off all LEDs  
 ```
-echo 012 < /dev/myled0    
+echo 123 > /dev/myled0 
 ```
 
-# Uninstallation
+# Uninstall
 ```
-sudo rmmod meled.ko
+sudo rmmod myled
 ```
 
 # Note
-Please connect resistors to LEDs to prevent LED from bursting.
+Please connect resistors to the LED's to prevent them from bursting.
 # Author
 
 * Kippei Onishi and Ryuichi Ueda  
